@@ -1,0 +1,55 @@
+import axios from 'axios';
+import {BehaviorSubject} from 'rxjs';
+
+const API_URL ='http://localhost:9000/api/user/*';
+const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+
+class UserService{
+    currentUserSubject;
+
+
+    get currentUserValue() {
+        return currentUserSubject.value;
+    }
+
+    get currentUser(){
+        return this.currentUserSubject.asObservable();
+    }
+
+    login(user){
+        const headers = {
+            authorization: 'Basic ' + btoa(user.username + ':' + user.password)
+        };
+
+        return axios.get(API_URL+'login',{headers: headers})
+            .then(response => {
+                localStorage.setItem('currentUser', JSON.stringify(response.data));
+                currentUserSubject.next(response.data);
+            });
+    }
+
+    logOut(){
+        return axios.post(API_URL + "logout",{})
+            .then(response =>{
+                localStorage.removeItem('currentUser');
+                currentUserSubject.next(null);
+            });
+    }
+
+    register(user){
+        return axios.post(API_URL + 'registration', JSON.stringify(user),
+            {headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    }
+
+    findAllPhotos(){
+        return axios.get(API_URL + 'photos',
+            {headers: {"Content-Type":"application/json; charset=UTF-8"}} );
+    }
+
+    uploadPhotos(events){
+        return axios.post(API_URL + "uploadPhotoEvent",
+            {headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    }
+
+}
+export default new UserService();
