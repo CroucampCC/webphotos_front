@@ -69,11 +69,19 @@ class RegisterPage extends React.Component {
                     </div>
                     }
                     <form name="form" onSubmit={(e) => this.handleRegister(e)}>
-                        <div className={'form-group' + (submitted && user.name ? 'has-error': '')}>
-                            <label htmlFor="name">Full Name</label>
-                            <input type="text" className="form-control" name="name" value={user.name} onChange={(e)=>this.handleChange(e)}/>
-                            {submitted && !user.name &&
-                            <div className="alert alert-danger" role="alert">Full name is required.</div>
+                        <div className={'form-group' + (submitted && user.firstName ? 'has-error': '')}>
+                            <label htmlFor="name">First Name</label>
+                            <input type="text" className="form-control" name="first_Name" value={user.firstName} onChange={(e)=>this.handleChange(e)}/>
+                            {submitted && !user.firstName &&
+                            <div className="alert alert-danger" role="alert">First name is required.</div>
+                            }
+                        </div>
+
+                        <div className={'form-group' + (submitted && user.lastName ? 'has-error': '')}>
+                            <label htmlFor="name">Last Name</label>
+                            <input type="text" className="form-control" name="last_Name" value={user.lastName} onChange={(e)=>this.handleChange(e)}/>
+                            {submitted && !user.lastName &&
+                            <div className="alert alert-danger" role="alert">Last name is required.</div>
                             }
                         </div>
 
@@ -90,6 +98,23 @@ class RegisterPage extends React.Component {
                             <input type="password" className="form-control" name="password" value={user.password} onChange={(e)=>this.handleChange(e)}/>
                             {submitted && !user.password &&
                             <div className="alert alert-danger" role="alert">Password is required.</div>
+                            }
+                        </div>
+
+
+                        <div className={'form-group' + (submitted && user.emailAddress ? 'has-error': '')}>
+                            <label htmlFor="name">email address</label>
+                            <input type="text" className="form-control" name="emailAddress" value={user.emailAddress} onChange={(e)=>this.handleChange(e)}/>
+                            {submitted && !user.emailAddress &&
+                            <div className="alert alert-danger" role="alert">email is required.</div>
+                            }
+                        </div>
+
+                        <div className={'form-group' + (submitted && user.phoneNumber ? 'has-error': '')}>
+                            <label htmlFor="name">email address</label>
+                            <input type="text" className="form-control" name="phoneNumber" value={user.phoneNumber} onChange={(e)=>this.handleChange(e)}/>
+                            {submitted && !user.phoneNumber &&
+                            <div className="alert alert-danger" role="alert">Phone/Cell number is required.</div>
                             }
                         </div>
                         <div className="form-group">
