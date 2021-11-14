@@ -91,7 +91,7 @@ class HomePage extends React.Component{
                         <tr key={photos.id}>
                             <th scope="row">{index + 1}</th>
                             <td>{photos.name}</td>
-                            <td>{'$ ' + photos.url}</td>
+                            <td>{photos.url}</td>
                             <td>
                                 <button className="btn btn-info" onClick={() => this.detail(photos)}>Description</button>
                             </td>
