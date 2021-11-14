@@ -50,7 +50,7 @@ class HomePage extends React.Component{
     }
 
     detail(photos) {
-        localStorage.setItem('currentProduct', JSON.stringify(photos));
+        localStorage.setItem('currentPhotos', JSON.stringify(photos));
         this.props.history.push('/detail/'+photos.id);
     }
 
