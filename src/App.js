@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Router, Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Router, Route, Link, Switch, Redirect, Navigate} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 import {HomePage} from './components/home/HomePage';
@@ -115,7 +115,7 @@ class App extends React.Component{
                             <AuthGuard path="/admin" roles={[Role.ADMIN]} component={AdminPage}/>
                             <Route exact path="/404" component={NotFound}/>
                             <Route exact path="/401" component={Unauthorized}/>
-                            <Redirect from='*' to='/404' />
+                            <Navigate from='*' to='/404' />
                         </Switch>
                     </div>
                 </div>
