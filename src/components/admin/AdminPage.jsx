@@ -22,12 +22,15 @@ class AdminPage extends React.Component {
             showDeleteModal: false,
         };
 
+        //(user, isSucceed, isUpdate)=>this.onChildUpdate(user, isSucceed, isUpdate);
+        //this.onChildUpdate = this.onChildUpdate.bind(this);
+        //this.onDeleteChildUpdate = this.onDeleteChildUpdate.bind(this);
 
     }
 
     componentDidMount() {
         this.setState({
-            users: { loading: true },
+            Users: { loading: true },
         });
         AdminService.findAllUsers()
             .then(users => {
@@ -37,7 +40,7 @@ class AdminPage extends React.Component {
     }
 
     createUserRequest() {
-        this.setState({ selectedUser: new User('','','','',-1) });
+        this.setState({ selectedUser: new User('','','','','','','',-1,'') });
         this.setState({
             showModal: true
         });
@@ -77,7 +80,7 @@ class AdminPage extends React.Component {
             return;
         }
         var userList = this.state.users;
-        let itemIndex = userList.findIndex(item => item.id == user.id);
+        let itemIndex = userList.findIndex(item => item.id === user.id);
         if(itemIndex !== -1){
             userList.splice(itemIndex, 1);
             this.setState({
@@ -118,7 +121,7 @@ class AdminPage extends React.Component {
 
     updateUser(user){
         var userList = this.state.users;
-        let itemIndex = userList.findIndex(item => item.id == user.id);
+        let itemIndex = userList.findIndex(item => item.id === user.id);
         userList[itemIndex] = user;
     }
 

@@ -1,7 +1,7 @@
 export class Events{
-    constructor(user, photo, eventDate, id){
+    constructor(user, photos, eventDate, id){
         this.user = user;
-        this.photo = photo;
+        this.photos = photos;
         this.eventDate = eventDate;
         this.id = id;
     }

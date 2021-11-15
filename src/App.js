@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Router, Route, Link, Switch, Redirect, Navigate} from 'react-router-dom';
+import {Router, Route, Link, Switch, Redirect} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 import {HomePage} from './components/home/HomePage';
@@ -14,7 +14,7 @@ import {NotFound} from './components/errors/NotFound';
 import {Unauthorized} from './components/errors/Unauthorized';
 
 import AuthGuard from './guards/AuthGuard';
-import {Role} from './model/role';
+import {Role} from './models/role';
 
 import UserService from './services/user.service';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -66,6 +66,7 @@ class App extends React.Component{
     }
 
     render(){
+        // eslint-disable-next-line no-unused-vars
         const {currentUser, isAdmin, history, currentLocation} = this.state;
         return (
             <Router history={history}>
@@ -83,7 +84,7 @@ class App extends React.Component{
 
                         <div className="navbar-nav ml-auto">
                             <Link to="/profile" className={currentLocation === '/profile' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUser}/> {currentUser.name}</Link>
-                            <a onClick={()=>this.logout()} className="nav-item nav-link"><FontAwesomeIcon icon={faSignOutAlt}/> LogOut</a>
+                            <a href="#" onClick={()=>this.logout()} className="nav-item nav-link"><FontAwesomeIcon icon={faSignOutAlt}/> LogOut</a>
                         </div>
                     </nav>
                     }
@@ -115,7 +116,7 @@ class App extends React.Component{
                             <AuthGuard path="/admin" roles={[Role.ADMIN]} component={AdminPage}/>
                             <Route exact path="/404" component={NotFound}/>
                             <Route exact path="/401" component={Unauthorized}/>
-                            <Navigate from='*' to='/404' />
+                            <Redirect from='*' to='/404' />
                         </Switch>
                     </div>
                 </div>

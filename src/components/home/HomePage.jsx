@@ -2,7 +2,7 @@ import React from 'react';
 import UserService from '../../services/user.service';
 import {User} from '../../models/user';
 
-import {Events} from "../../model/events";
+import {Events} from "../../models/events";
 
 class HomePage extends React.Component{
 
@@ -28,8 +28,8 @@ class HomePage extends React.Component{
             photos:{loading: true}
         });
 
-        UserService.findAllPhotos().
-        then(photos => {
+        UserService.findAllPhotos()
+            .then(photos => {
             this.setState({photos: photos.data});
         });
     }
@@ -60,7 +60,7 @@ class HomePage extends React.Component{
             <div className="col-md-12">
                 {infoMessage &&
                 <div className="alert alert-success">
-                    <strong>Successfull! </strong> {infoMessage}
+                    <strong>Successful! </strong> {infoMessage}
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

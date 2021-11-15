@@ -1,6 +1,6 @@
 import React from 'react';
 import UserService from '../../services/user.service';
-import {User} from "../../model/user";
+import {User} from "../../models/user";
 import './LoginPage.css';
 
 class LoginPage extends React.Component{
@@ -55,7 +55,7 @@ class LoginPage extends React.Component{
         return (
             <div className="col-md-12">
                 <div className="card card-container">
-                    <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                    <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="" />
                     {errorMessage &&
                     <div className="alert alert-danger" role="alert">
                         <strong>Error! </strong> {errorMessage}
