@@ -12,7 +12,7 @@ class RegisterPage extends React.Component {
         }
 
         this.state = {
-            user: new User('','','','','','','',-1,''),
+            user: new User('','',''),
             submitted: false,
             loading: false,
             errorMessage: ''
@@ -31,7 +31,7 @@ class RegisterPage extends React.Component {
         this.setState({submitted: true});
         const{user} = this.state;
 
-        if(!(user.username && user.password)){
+        if(!(user.username && user.password && user.name)){
             return;
         }
 
@@ -39,7 +39,7 @@ class RegisterPage extends React.Component {
         UserService.register(user)
             .then(
                 data => {
-                    this.props.history.push('/login');
+                    this.props.history.push("/login");
                 },
                 error => {
                     if(error.response.status === 409){
@@ -69,19 +69,11 @@ class RegisterPage extends React.Component {
                     </div>
                     }
                     <form name="form" onSubmit={(e) => this.handleRegister(e)}>
-                        <div className={'form-group' + (submitted && user.firstName ? 'has-error': '')}>
-                            <label htmlFor="name">First Name</label>
-                            <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={(e)=>this.handleChange(e)}/>
-                            {submitted && !user.firstName &&
-                            <div className="alert alert-danger" role="alert">First name is required.</div>
-                            }
-                        </div>
-
-                        <div className={'form-group' + (submitted && user.lastName ? 'has-error': '')}>
-                            <label htmlFor="name">Last Name</label>
-                            <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={(e)=>this.handleChange(e)}/>
-                            {submitted && !user.lastName &&
-                            <div className="alert alert-danger" role="alert">Last name is required.</div>
+                        <div className={'form-group' + (submitted && user.name ? 'has-error': '')}>
+                            <label htmlFor="name">Full Name</label>
+                            <input type="text" className="form-control" name="name" value={user.name} onChange={(e)=>this.handleChange(e)}/>
+                            {submitted && !user.name &&
+                            <div className="alert alert-danger" role="alert">Full name is required.</div>
                             }
                         </div>
 
@@ -98,23 +90,6 @@ class RegisterPage extends React.Component {
                             <input type="password" className="form-control" name="password" value={user.password} onChange={(e)=>this.handleChange(e)}/>
                             {submitted && !user.password &&
                             <div className="alert alert-danger" role="alert">Password is required.</div>
-                            }
-                        </div>
-
-
-                        <div className={'form-group' + (submitted && user.emailAddress ? 'has-error': '')}>
-                            <label htmlFor="name">Email Address</label>
-                            <input type="text" className="form-control" name="emailAddress" value={user.emailAddress} onChange={(e)=>this.handleChange(e)}/>
-                            {submitted && !user.emailAddress &&
-                            <div className="alert alert-danger" role="alert">email is required.</div>
-                            }
-                        </div>
-
-                        <div className={'form-group' + (submitted && user.phoneNumber ? 'has-error': '')}>
-                            <label htmlFor="name">Phone Number</label>
-                            <input type="text" className="form-control" name="phoneNumber" value={user.phoneNumber} onChange={(e)=>this.handleChange(e)}/>
-                            {submitted && !user.phoneNumber &&
-                            <div className="alert alert-danger" role="alert">Phone/Cell number is required.</div>
                             }
                         </div>
                         <div className="form-group">

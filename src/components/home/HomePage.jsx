@@ -1,8 +1,7 @@
 import React from 'react';
 import UserService from '../../services/user.service';
 import {User} from '../../models/user';
-
-import {Events} from "../../models/events";
+import {Transaction} from '../../models/transaction';
 
 class HomePage extends React.Component{
 
@@ -10,7 +9,7 @@ class HomePage extends React.Component{
         super(props);
 
         this.state = {
-            photos: [],
+            products: [],
             errorMessage: '',
             infoMessage: '',
             currentUser: new User(),
@@ -25,23 +24,23 @@ class HomePage extends React.Component{
         });
 
         this.setState({
-            photos:{loading: true}
+            products: {loading: true}
         });
 
-        UserService.findAllPhotos()
-            .then(photos => {
-            this.setState({photos: photos.data});
+        UserService.findAllProducts().
+        then(products => {
+            this.setState({products: products.data});
         });
     }
 
-    uploadPhotos(photos) {
+    purchaseProduct(product) {
         if(!this.state.currentUser){
             this.setState({errorMessage: "You should sign in to purchase a product"});
             return;
         }
 
-        var events = new Events(this.state.currentUser, photos);
-        UserService.uploadPhotos(events)
+        var transaction = new Transaction(this.state.currentUser, product);
+        UserService.purchaseProduct(transaction)
             .then(data => {
                 this.setState({infoMessage: "Mission is completed."});
             },error => {
@@ -49,18 +48,18 @@ class HomePage extends React.Component{
             });
     }
 
-    detail(photos) {
-        localStorage.setItem('currentPhotos', JSON.stringify(photos));
-        this.props.history.push('/detail/'+photos.id);
+    detail(product) {
+        localStorage.setItem('currentProduct', JSON.stringify(product));
+        this.props.history.push('/detail/'+product.id);
     }
 
     render() {
-        const {photos, infoMessage, errorMessage} = this.state;
+        const {products, infoMessage, errorMessage} = this.state;
         return (
             <div className="col-md-12">
                 {infoMessage &&
                 <div className="alert alert-success">
-                    <strong>Successful! </strong> {infoMessage}
+                    <strong>Successfull! </strong> {infoMessage}
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -74,29 +73,29 @@ class HomePage extends React.Component{
                     </button>
                 </div>
                 }
-                {photos.loading && <em> Loading products...</em>}
-                {photos.length &&
+                {products.loading && <em> Loading products...</em>}
+                {products.length &&
                 <table className="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Detail</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {photos.map((photos, index) =>
-                        <tr key={photos.id}>
+                    {products.map((product, index) =>
+                        <tr key={product.id}>
                             <th scope="row">{index + 1}</th>
-                            <td>{photos.name}</td>
-                            <td>{photos.url}</td>
+                            <td>{product.name}</td>
+                            <td>{'$ ' + product.price}</td>
                             <td>
-                                <button className="btn btn-info" onClick={() => this.detail(photos)}>Description</button>
+                                <button className="btn btn-info" onClick={() => this.detail(product)}>Detail</button>
                             </td>
                             <td>
-                                <button className="btn btn-success" onClick={() => this.uploadPhotos(photos)}>Upload</button>
+                                <button className="btn btn-success" onClick={() => this.purchaseProduct(product)}>Purchase</button>
                             </td>
                         </tr>
                     )

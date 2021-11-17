@@ -6,15 +6,15 @@ class DetailPage extends React.Component {
 
         this.state = {
             id: this.props.match.params.id,
-            product: JSON.parse(localStorage.getItem('currentPhotos'))
+            product: JSON.parse(localStorage.getItem('currentProduct'))
         };
     }
 
     render() {
         return (
             <div className="jumbotron">
-                <h1 className="display-4">Photo: {this.state.photos.name}</h1>
-                <h1 className="display-4">Photo Id: {this.state.id}</h1>
+                <h1 className="display-4">Product: {this.state.product.name}</h1>
+                <h1 className="display-4">Product Id: {this.state.id}</h1>
             </div>
         );
     }

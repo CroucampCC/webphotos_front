@@ -66,7 +66,6 @@ class App extends React.Component{
     }
 
     render(){
-        // eslint-disable-next-line no-unused-vars
         const {currentUser, isAdmin, history, currentLocation} = this.state;
         return (
             <Router history={history}>
@@ -78,13 +77,13 @@ class App extends React.Component{
                             React
                         </a>
                         <div className="navbar-nav mr-auto">
-                            <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
-                            {this.state.isAdmin && <Link to="/admin" className={currentLocation === '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
+                            <Link to="/home" className={currentLocation == '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
+                            {this.state.isAdmin && <Link to="/admin" className={currentLocation == '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
                         </div>
 
                         <div className="navbar-nav ml-auto">
-                            <Link to="/profile" className={currentLocation === '/profile' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUser}/> {currentUser.name}</Link>
-                            <a href="#" onClick={()=>this.logout()} className="nav-item nav-link"><FontAwesomeIcon icon={faSignOutAlt}/> LogOut</a>
+                            <Link to="/profile" className={currentLocation == '/profile' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUser}/> {currentUser.name}</Link>
+                            <a onClick={()=>this.logout()} className="nav-item nav-link"><FontAwesomeIcon icon={faSignOutAlt}/> LogOut</a>
                         </div>
                     </nav>
                     }
@@ -96,12 +95,12 @@ class App extends React.Component{
                             React
                         </a>
                         <div className="navbar-nav mr-auto">
-                            <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
+                            <Link to="/home" className={currentLocation == '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
                         </div>
 
                         <div className="navbar-nav ml-auto">
-                            <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
-                            <Link to="/login" className={currentLocation === '/login' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
+                            <Link to="/register" className={currentLocation == '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                            <Link to="/login" className={currentLocation == '/login' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
                         </div>
                     </nav>
                     }

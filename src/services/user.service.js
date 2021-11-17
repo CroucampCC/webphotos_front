@@ -40,15 +40,16 @@ class UserService {
             {headers: {"Content-Type":"application/json; charset=UTF-8"}});
     }
 
-    findAllPhotos(){
-        return axios.get(API_URL + 'photos',
-            {headers: {"Content-Type":"application/json; charset=UTF-8"}} );
+    findAllProducts() {
+        return axios.get(API_URL + "products",
+            {headers: {"Content-Type":"application/json; charset=UTF-8"}});
     }
 
-    uploadPhotos(events){
-        return axios.post(API_URL + "uploadPhotoEvent",
+    purchaseProduct(transaction) {
+        return axios.post(API_URL + "purchase", JSON.stringify(transaction),
             {headers: {"Content-Type":"application/json; charset=UTF-8"}});
     }
 
 }
+
 export default new UserService();

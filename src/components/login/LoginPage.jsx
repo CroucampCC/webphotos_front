@@ -1,21 +1,24 @@
+
 import React from 'react';
 import UserService from '../../services/user.service';
-import {User} from "../../models/user";
+import {User} from '../../models/user';
 import './LoginPage.css';
 
-class LoginPage extends React.Component{
+class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
 
-        if(UserService.currentUserValue){
+        // redirect to home if already logged in
+        if (UserService.currentUserValue) {
             this.props.history.push('/');
         }
+
         this.state = {
             user: new User('',''),
-            errorMessage: '',
             submitted: false,
             loading: false,
+            errorMessage: ''
         };
     }
 
@@ -50,12 +53,13 @@ class LoginPage extends React.Component{
             );
     }
 
+
     render() {
         const { user, submitted, loading, errorMessage } = this.state;
         return (
             <div className="col-md-12">
                 <div className="card card-container">
-                    <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="" />
+                    <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                     {errorMessage &&
                     <div className="alert alert-danger" role="alert">
                         <strong>Error! </strong> {errorMessage}
@@ -86,4 +90,4 @@ class LoginPage extends React.Component{
     }
 }
 
-export {LoginPage}
+export { LoginPage };
